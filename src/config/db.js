@@ -1,0 +1,21 @@
+const mongoose = require('mongoose');
+require('dotenv').config();
+const mongoURI = process.env.MONGODB_URI;
+
+mongoose.connect(mongoURI);
+const db = mongoose.connection;
+
+// Event listeners
+db.on('connected', () => {
+    console.log('Connected to MongoDB server');
+});
+
+db.on('error', (err) => {
+    console.error('MongoDB connection error', err);
+});
+
+db.on('disconnected', () => {
+    console.log('MongoDB disconnected');
+});
+
+module.exports = db;
