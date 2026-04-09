@@ -3,5 +3,5 @@ const app = require("./src/app");
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
-    console.log("server is running at 5000");
+    console.log("server is running at 3000");
 })
