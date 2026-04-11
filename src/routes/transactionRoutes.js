@@ -5,10 +5,11 @@ const {
     addTransaction,
     getTransactions,
     getSingleTransaction,
+    getSummary,
     updateTransaction,
     deleteTransaction
 } = require('../controllers/transactionController');
-
+router.get('/summary', jwtAuthMiddleware, getSummary);
 router.post('/', jwtAuthMiddleware, addTransaction);
 router.get('/', jwtAuthMiddleware, getTransactions);
 router.get('/:id', jwtAuthMiddleware, getSingleTransaction);

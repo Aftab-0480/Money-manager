@@ -111,10 +111,42 @@ const deleteTransaction = async (req, res, next) => {
   }
 };
 
+const getSummary = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const transactions = await Transaction.find({ user: userId });
+
+    let totalIncome = 0;
+    let totalExpense = 0;
+
+    transactions.forEach((t) => {
+      if (t.type === "income") {
+        totalIncome += t.amount;
+      } else {
+        totalExpense += t.amount;
+      }
+    });
+
+    const balance = totalIncome - totalExpense;
+
+    res.status(200).json({
+      totalIncome,
+      totalExpense,
+      balance
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   addTransaction,
   getTransactions,
   getSingleTransaction,
+  getSummary,
   updateTransaction,
   deleteTransaction,
 };
