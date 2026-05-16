@@ -18,7 +18,7 @@ const addTransaction = async (req, res, next) => {
 
     // create transaction
     const transaction = await Transaction.create({
-      user: userId, // 🔥 from token, not frontend
+      user: userId, // from token, not frontend
       type,
       amount,
       category,
